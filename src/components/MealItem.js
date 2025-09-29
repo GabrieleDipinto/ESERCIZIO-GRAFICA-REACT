@@ -9,12 +9,12 @@ const MealItem = ({ id, name, description, price, onAddToCart }) => {
   };
 
   const decreaseAmount = () => {
-    setAmount(prev => prev > 1 ? prev - 1 : 1);
+    setAmount(prev => (prev > 1 ? prev - 1 : 1));
   };
 
   const addToCartHandler = () => {
     onAddToCart({ id, name, description, price }, amount);
-    setAmount(1); 
+    setAmount(1);
   };
 
   return (
@@ -28,8 +28,8 @@ const MealItem = ({ id, name, description, price, onAddToCart }) => {
         <div className="amount-controls">
           <div className="amount-label">Amount</div>
           <div className="amount-input-group">
-            <input 
-              type="number" 
+            <input
+              type="number"
               className="amount-input"
               value={amount}
               onChange={(e) => setAmount(parseInt(e.target.value) || 1)}
