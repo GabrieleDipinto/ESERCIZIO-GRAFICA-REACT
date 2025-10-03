@@ -3,6 +3,7 @@ import MealItem from './MealItem';
 import '../styles/MealList.css';
 
 const MealList = ({ meals, onAddToCart }) => {
+  // qui non cambiamo la logica originale
   return (
     <>
       <div className="divider"></div>
@@ -10,11 +11,11 @@ const MealList = ({ meals, onAddToCart }) => {
         {meals.map(meal => (
           <MealItem
             key={meal.id}
-            id={meal.id} // importante passare anche l'id
+            id={meal.id}
             name={meal.name}
             description={meal.description}
             price={meal.price}
-            onAddToCart={onAddToCart} // <- ora è passato
+            onAddToCart={onAddToCart}
           />
         ))}
       </div>

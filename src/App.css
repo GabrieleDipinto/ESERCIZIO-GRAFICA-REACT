@@ -9,6 +9,17 @@ body {
   background-color: #383838;
   color: #333;
   font-size: 14px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body.light {
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+body.dark {
+  background-color: #1e1e1e;
+  color: #eee;
 }
 
 .App {
@@ -23,6 +34,14 @@ body {
   background-color: #383838;
   position: relative;
   z-index: 1;
+}
+
+body.light .main-content {
+  background-color: #f4f4f4;
+}
+
+body.dark .main-content {
+  background-color: #1e1e1e;
 }
 
 /* eliminato il divider */
@@ -50,4 +69,17 @@ body {
 
 .add-more-button:hover {
   background-color: #5a1a01;
+}
+
+/* puoi aggiungere qui stili opzionali per link, header, bottoni ecc. */
+body.light .header,
+body.light .cart-button,
+body.light .nav-links a {
+  color: #333;
+}
+
+body.dark .header,
+body.dark .cart-button,
+body.dark .nav-links a {
+  color: #eee;
 }

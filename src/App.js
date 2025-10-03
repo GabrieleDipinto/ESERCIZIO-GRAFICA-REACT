@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+// src/App.js
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Header from './components/Header';
-import Hero from './components/Hero';
-import MealList from './components/MealList';
 import Cart from './components/Cart';
+import AppRouter from './AppRouter';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { UserProvider } from './context/UserContext';
+import { ProductsProvider } from './context/ProductsContext';
+import { ThemeProvider } from './context/ThemeContext';
 
 function App() {
   const [meals, setMeals] = useState([
@@ -21,7 +25,6 @@ function App() {
   const addToCart = (meal, quantity) => {
     setCartItems(prevItems => {
       const existingItem = prevItems.find(item => item.id === meal.id);
-
       if (existingItem) {
         return prevItems.map(item =>
           item.id === meal.id ? { ...item, quantity: item.quantity + quantity } : item
@@ -41,7 +44,6 @@ function App() {
       removeFromCart(mealId);
       return;
     }
-
     setCartItems(prevItems =>
       prevItems.map(item =>
         item.id === mealId ? { ...item, quantity: newQuantity } : item
@@ -50,31 +52,31 @@ function App() {
   };
 
   const getTotalItems = () => cartItems.reduce((total, item) => total + item.quantity, 0);
-
   const getTotalPrice = () => cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
-
   const toggleCart = () => setShowCart(prev => !prev);
 
   return (
-    <div className="App">
-      <Header cartItemsCount={getTotalItems()} onCartClick={toggleCart} />
-      <Hero />
-      <div className="main-content">
-        <MealList meals={meals} onAddToCart={addToCart} /> {/* <- funzione passata */}
-        <div className="add-more-section">
-          <button className="add-more-button">Add More Delicious Meal</button>
-        </div>
-      </div>
-      {showCart && (
-        <Cart
-          items={cartItems}
-          onRemove={removeFromCart}
-          onUpdateQuantity={updateCartItemQuantity}
-          totalPrice={getTotalPrice()}
-          onClose={toggleCart}
-        />
-      )}
-    </div>
+    <Router>
+      <UserProvider>
+        <ProductsProvider>
+          <ThemeProvider>
+            <div className="App">
+              <Header cartItemsCount={getTotalItems()} onCartClick={toggleCart} />
+              <AppRouter meals={meals} addToCart={addToCart} />
+              {showCart && (
+                <Cart
+                  items={cartItems}
+                  onRemove={removeFromCart}
+                  onUpdateQuantity={updateCartItemQuantity}
+                  totalPrice={getTotalPrice()}
+                  onClose={toggleCart}
+                />
+              )}
+            </div>
+          </ThemeProvider>
+        </ProductsProvider>
+      </UserProvider>
+    </Router>
   );
 }
 

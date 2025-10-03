@@ -1,5 +1,5 @@
 .header {
-  background-color: #8a2b06;
+  background-color: #8a2b06; /* rosso originale */
   color: white;
   padding: 0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
@@ -14,8 +14,8 @@
   margin: 0 auto;
   padding: 0.8rem 20px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 }
 
 .logo {
@@ -25,9 +25,37 @@
   font-weight: bold;
 }
 
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* spazio tra i link e il carrello */
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: #ffb347;
+}
+
+.nav-links a.active {
+  border-bottom: 2px solid #ffb347;
+}
+
+/* Cart button */
 .cart-button {
   background-color: #4d1601;
-  color: white;
+  color: white; /* testo di default */
   border: none;
   padding: 0.6rem 1.5rem;
   border-radius: 25px;
@@ -45,8 +73,13 @@
   transform: scale(1.05);
 }
 
+.cart-button .cart-text {
+  color: inherit; /* eredita il colore del button */
+}
+
 .cart-icon {
   font-size: 1rem;
+  color: inherit; /* icona segue il colore del button */
 }
 
 .cart-badge {
@@ -55,19 +88,68 @@
   border-radius: 25px;
   margin-left: 0.4rem;
   font-size: 0.8rem;
+  color: white;
 }
 
+/* User greeting e login button */
+.user-greeting {
+  color: white;
+  font-weight: bold;
+}
+
+.login-btn {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.login-btn:hover {
+  color: #ffb347;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+}
+
+/* ------------------- */
+/* Modalità giorno (light theme) */
+.header.light .nav-links a,
+.header.light .login-btn,
+.header.light .user-greeting,
+.header.light .cart-button .cart-text,
+.header.light .cart-icon {
+  color: white;
+}
+
+/* Media queries */
 @media (max-width: 768px) {
   .header-content {
     padding: 0.6rem 15px;
   }
-  
+
   .logo {
     font-size: 1.3rem;
   }
-  
+
   .cart-button {
     padding: 0.5rem 1.2rem;
     font-size: 0.8rem;
+  }
+
+  .nav-links {
+    gap: 0.5rem;
   }
 }
